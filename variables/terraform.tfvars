@@ -1,2 +1,2 @@
 # instance_type = "t3.small"
-# sg_name = "allow-all-terraform-tfvars"
+# sg_name = "allow-all-terraform-tfvars" # Users can have their own tfvars to supply their own values....
