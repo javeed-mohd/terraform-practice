@@ -1,13 +1,10 @@
 resource "aws_instance" "example" {
-  # for_each      = var.instances # It takes map from variables.tf
-  for_each      = toset(var.instances) # It takes list from variables.tf and converts to set using toset function
   ami           = "ami-0220d79f3f480ecf5"
-  # instance_type = each.value # For Map
-  instance_type = "t3.micro" # For Set conversion, No requirement of K-V pair
+  instance_type = "t3.micro"
   vpc_security_group_ids = [aws_security_group.allow_tls.id] # Dependent on aws_security_group creaion(Dependency Management)
 
   tags = {
-    Name = each.key
+    Name = "terraform"
     Project = "roboshop"
   }
 }
