@@ -1,12 +1,15 @@
+# To record we use local and to store we use locals...
+
 resource "aws_instance" "example" {
-  ami           = "ami-0220d79f3f480ecf5"
-  instance_type = "t3.micro"
+  ami           = local.ami_id
+  instance_type = local.instance_type
   vpc_security_group_ids = [aws_security_group.allow_tls.id] # Dependent on aws_security_group creaion(Dependency Management)
 
-  tags = {
-    Name = local.instance_name
+  /* tags = {
+    Name = local.instance_name # 1. To access locals.tf, we use this...
     Project = "roboshop"
-  }
+  } */
+  tags  = local.ec2_final_tags
 }
 
 # Creation of security group
