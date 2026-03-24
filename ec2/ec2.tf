@@ -1,3 +1,4 @@
+# Creation of EC2 Instance
 resource "aws_instance" "example" {
   ami           = "ami-0220d79f3f480ecf5"
   instance_type = "t3.micro"
@@ -9,9 +10,9 @@ resource "aws_instance" "example" {
   }
 }
 
-# Creation of security group
+# Creation of Security Group (Change for taint)
 resource "aws_security_group" "allow_tls" {
-  name        = "allow-all-terraform" # this is for AWS account  # "allow tls" is for terraform reference
+  name        = "allow-all-terraform-change" # this is for AWS account  # "allow tls" is for terraform reference
   description = "Allow TLS inbound traffic and all outbound traffic"
 
   egress {
@@ -32,5 +33,10 @@ resource "aws_security_group" "allow_tls" {
 
   tags = {
     Name = "allow-all-terraform"
+  }
+
+  # Terraform Lifecycle --> Lifecycle block is a meta-argument used inside a resource to control how Terraform manages that resource during creation, updates, and deletion.
+  lifecycle {
+    create_before_destroy = true
   }
 }
